@@ -1,0 +1,86 @@
+<!-- pages/MonthlyBill/MonthlyBill.wxml -->
+<view class="safe-area-top"></view>
+
+<view class="custom-navbar">
+  <view class="title-box">
+    <text class="nav-title"></text>
+  </view>
+</view>
+
+<view class="container">
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">‹ 返回</view>
+    <picker 
+      mode="date" 
+      fields="month" 
+      value="{{selectedMonth}}"
+      start="2000-01" 
+      end="{{maxMonth}}"
+      bindchange="onMonthChange"
+      class="month-picker"
+    >
+      <text class="title">{{currentMonth}}账单 ▼</text>
+    </picker>
+  </view>
+
+  <view class="stats-container">
+    <view class="stat-box">
+      <view class="main-stat">
+        <text class="stat-label">月支出</text>
+        <text class="stat-value expense">¥{{monthlyExpense}}</text>
+      </view>
+      <view class="sub-stats">
+        <view class="sub-stat-item">
+          <text class="sub-label">月收入</text>
+          <text class="sub-value income">¥{{monthlyIncome}}</text>
+        </view>
+        <view class="sub-stat-item">
+          <text class="sub-label">月结余</text>
+          <text class="sub-value {{monthlyBalance >= 0 ? 'income' : 'expense'}}">¥{{monthlyBalance}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="transactions">
+    <block wx:if="{{hasTransactions}}">
+      <block wx:for="{{transactions}}" wx:key="date">
+        <view class="date-group">
+          <view class="group-header">
+            <text class="date-text">{{item.date}}</text>
+            <view class="daily-totals">
+              <text class="total-income">+¥{{item.income}}</text>
+              <text class="total-expense">-¥{{item.expense}}</text>
+            </view>
+          </view>
+          <view class="group-items">
+            <block wx:for="{{item.items}}" wx:key="_id">
+              <view class="transaction-item" bindtap="onTransactionTap" data-id="{{item._id}}">
+                <view class="left">
+                  <view class="time">{{item.time}}</view>
+                  <view class="description">{{item.description}}</view>
+                  <view class="remark" wx:if="{{item.remark && item.remark !== '无备注'}}">{{item.remark}}</view>
+                </view>
+                <view class="amount {{item.type === '支出' ? 'expense' : 'income'}}">{{item.amount}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </block>
+    
+    <block wx:else>
+      <view class="empty-state">
+        <text class="empty-text">{{currentMonth}}暂无记录</text>
+      </view>
+    </block>
+  </view>
+
+    <!-- 弹窗组件 -->
+    <detail-modal 
+    visible="{{showDetailModal}}" 
+    transaction="{{selectedTransaction}}"
+    bind:close="handleCloseModal"
+  />
+</view>
+

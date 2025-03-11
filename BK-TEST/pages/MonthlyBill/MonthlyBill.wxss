@@ -1,0 +1,273 @@
+/* pages/MonthlyBill/MonthlyBill.wxss */
+
+.month-picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 新增每日统计样式 */
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: #333;
+  color: #888;
+  font-size: 28rpx;
+}
+
+.daily-totals {
+  display: flex;
+  gap: 30rpx;
+}
+
+.total-income {
+  color: #00cc66;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.total-expense {
+  color: #ff4d4d;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.date-text {
+  color: #888;
+  font-size: 28rpx;
+}
+
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  padding: 0 30rpx;
+  padding-top: env(safe-area-inset-top);
+  height: 88rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+.container {
+  padding: 88rpx 20rpx 20rpx; /* 为导航栏留出 88rpx 的顶部空间 */
+  min-height: 100vh;
+  background: #000;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 0 20rpx; /* 减小顶部和底部内边距 */
+  gap: 20rpx;
+}
+
+.stats-container {
+  padding:rpx  0 20rpx;
+  width: 100%;
+  margin-bottom: 0rpx; /* 调整为正值 */
+}
+
+.transactions {
+  padding: 0 20rpx;
+  width: 100%;
+  margin-top: 20rpx; /* 确保与统计容器之间的间距合理 */
+  margin-bottom: 450rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+.back-btn {
+  position: absolute;
+  left: 50rpx; /* 固定在左侧 */
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12rpx 24rpx;
+  background: #333;
+  border-radius: 40rpx;
+  z-index: 1; /* 确保在顶层 */
+}
+
+/* 统计容器 */
+
+
+.stat-box {
+  background: #333;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx; /* 确保统计容器内部的间距合理 */
+}
+
+.main-stat {
+  margin-bottom: 30rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #444;
+}
+
+.stat-label {
+  font-size: 28rpx;
+  color: #888;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 56rpx;
+  font-weight: 800;
+  display: block;
+  line-height: 1.2;
+}
+
+.sub-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+}
+
+.sub-stat-item {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.sub-label {
+  font-size: 28rpx;
+  color: #888;
+  margin-right: 15rpx;
+  white-space: nowrap;
+}
+
+.sub-value {
+  font-size: 34rpx;
+  font-weight: 600;
+  text-align: right;
+  min-width: 160rpx;
+}
+
+/* 新增月结余专属样式 */
+.balance-value {
+  white-space: nowrap;
+  min-width: auto !important;
+  flex-shrink: 0;
+  margin-left: 20rpx;
+}
+
+/* 交易列表 */
+
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30rpx;
+  background: #333;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.left {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.date {
+  font-size: 28rpx;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+.description {
+  font-size: 30rpx;
+  color: #fff;
+  margin-bottom: 8rpx;
+}
+
+.remark {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.amount {
+  font-size: 32rpx;
+  font-weight: 500;
+  min-width: 160rpx;
+  text-align: right;
+}
+
+/* 颜色定义 */
+.expense {
+  color: #ff4d4d;
+}
+
+.income {
+  color: #00cc66;
+}
+
+.date-group {
+  margin-bottom: 30rpx;
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.group-header {
+  padding: 20rpx 30rpx;
+  background: #333;
+  color: #888;
+  font-size: 28rpx;
+}
+
+.group-items {
+  padding: 0 20rpx;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30rpx 10rpx;
+  border-bottom: 1rpx solid #333;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+  margin-top: 100rpx;
+}
+
+.empty-text {
+  color: #999;
+  font-size: 25px;
+}

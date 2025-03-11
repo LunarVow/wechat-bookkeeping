@@ -1,0 +1,49 @@
+// utils/format.wxs
+function formatDateTime(dateTimeStr) {
+  if (!dateTimeStr) return '请选择时间'
+
+  // 处理多平台格式差异
+  var cleaned = dateTimeStr
+    .split('年').join('-')
+    .split('月').join('-')
+    .split('日').join(' ')
+    .split('T').join(' ')
+    .split('/').join('-')
+
+  // 分离日期和时间部分
+  var datePart = ''
+  var timePart = ''
+  if (cleaned.indexOf(' ') > -1) {
+    var parts = cleaned.split(' ')
+    datePart = parts[0] || ''
+    timePart = parts[1] || '00:00'
+  } else {
+    datePart = cleaned
+    timePart = '00:00'
+  }
+
+  // 处理日期部分 (手动补零)
+  var dateSegments = datePart.split('-')
+  var year = dateSegments[0] || '2024'
+  var month = (dateSegments[1] || '1').toString()
+  var day = (dateSegments[2] || '1').toString()
+
+  // 手动实现补零
+  month = month.length === 1 ? '0' + month : month
+  day = day.length === 1 ? '0' + day : day
+
+  // 处理时间部分
+  var timeSegments = timePart.split(':')
+  var hour = (timeSegments[0] || '00').toString()
+  var minute = (timeSegments[1] || '00').toString()
+
+  // 手动补零
+  hour = hour.length === 1 ? '0' + hour : hour
+  minute = minute.length === 1 ? '0' + minute : minute
+
+  return year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+}
+
+module.exports = {
+  formatDateTime: formatDateTime
+};

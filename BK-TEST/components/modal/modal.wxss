@@ -1,0 +1,126 @@
+/* components/modal/modal.wxss */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 保持半透明遮罩 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-container {
+  width: 85%;
+  background: rgb(49, 47, 47); /* 弹窗主体改为深灰背景 */
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #fff; /* 全局文字白色 */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.2); /* 白色半透明分割线 */
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff; /* 标题白色 */
+}
+
+.close {
+  font-size: 24px;
+  color: rgba(255,255,255,0.8); /* 关闭按钮浅白色 */
+  padding: 0 10px;
+}
+
+.detail-item {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center; /* 强制垂直居中 */
+}
+
+.label {
+  color: rgba(255,255,255,0.8); /* 标签浅白色 */
+  width: 60px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.value {
+  flex: 1;
+  word-break: break-all;
+  color: #fff; /* 内容纯白 */
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+/* 类型标签样式 */
+.type-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+
+}
+
+/* 金额特殊样式 */
+.amount {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.expense {
+  color: #ff6666 !important; /* 亮红色 */
+}
+
+.income {
+  color: #66ff66 !important; /* 亮绿色 */
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 10px; /* 按钮间距 */
+}
+
+.btn {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: opacity 0.2s;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn:active {
+  opacity: 0.7;
+}
+
+.copy {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.edit {
+  background: rgba(76, 175, 80, 0.2); /* 半透明绿色 */
+  color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.delete {
+  background: rgba(244, 67, 54, 0.2); /* 半透明红色 */
+  color: #F44336;
+  border-color: #F44336;
+}

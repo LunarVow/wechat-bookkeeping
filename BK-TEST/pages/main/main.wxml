@@ -1,0 +1,30 @@
+<!--pages/main/main.wxml-->
+<view class="container">
+  <view class="btn-group">
+    <navigator 
+      url="/pages/collection/collection" 
+      class="btn expense-btn"
+    >
+      支出
+    </navigator>
+    
+    <navigator 
+      url="/pages/take/take" 
+      class="btn income-btn"
+    >
+      收入
+    </navigator>
+    <navigator 
+      url="/pages/MonthlyBill/MonthlyBill" 
+      class="btn monthlybill-btn"
+    >
+      月度账单
+    </navigator>
+    <navigator 
+      url="/pages/AnnualBillBill/AnnualBillBill" 
+      class="btn AnnualBill-btn"
+    >
+      年度账单
+    </navigator>
+  </view>
+</view>

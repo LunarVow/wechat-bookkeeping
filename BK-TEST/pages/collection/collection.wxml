@@ -1,0 +1,91 @@
+<!--pages/collection.wxml-->
+
+<wxs src="../../utils/format.wxs" module="tools" />
+
+
+
+<view class="safe-area-top"></view>
+<!-- 固定导航栏 -->
+<view class="custom-navbar">
+  <view class="title-box">
+    <text class="nav-title"></text>
+  </view>
+</view>
+
+<!-- 页面内容容器 -->
+<view class="page-content">
+
+<!-- 新增：收支切换按钮 -->
+<view class="nav-header">
+  <view class="back-btn" bindtap="goBack">‹ 返回</view>
+  <view class="switch-buttons">
+    <view 
+      class="switch-btn expense {{isExpense ? 'active' : ''}}"
+      bindtap="switchType"
+      data-type="expense"
+    >支出</view>
+    <view 
+      class="switch-btn income {{!isExpense ? 'active' : ''}}"
+      bindtap="switchType"
+      data-type="income"
+    >收入</view>
+  </view>
+</view>
+<!-- 支出类别 -->
+<view class="category-container">
+  <block wx:for="{{categories}}" wx:key="id">
+    <view class="category-item" bindtap="selectCategory" data-id="{{item.id}}">
+      <image src="{{selectedCategory === item.id ? item.activeIcon : item.icon}}" style="width: 40px; height: 40px;"/>
+      <text>{{item.name}}</text>
+    </view>
+  </block>
+</view>
+
+<!-- 输入区域 -->
+<view class="input-section">
+
+  <!-- 日期与金额行 -->
+  <view class="date-row">
+  <picker mode="date" value="{{currentDate}}" bindchange="onDateChange">
+    <view class="date-picker">
+      {{currentDate}}
+    </view>
+  </picker>
+  <picker mode="time" value="{{currentTime}}" bindchange="onTimeChange">
+    <view class="date-picker time-picker">
+      {{currentTime}}
+    </view>
+  </picker>
+</view>
+
+<view class="date-row"> 
+ <!-- 备注输入 -->
+  <input 
+    placeholder="点此输入备注..." 
+    value="{{remark}}" 
+    bindinput="onRemarkInput"
+    class="remark-input"
+  />
+  
+  <view class="amount-display">
+    <text class="amount-symbol">¥</text>
+    <input type="digit" value="{{amount || '0.00'}}" placeholder="0.00" disabled class="amount-input"/>
+  </view></view>
+
+
+</view>
+
+
+<!-- 自定义数字键盘 -->
+<view class="num-keyboard">
+  <block wx:for="{{keyboardKeys}}" wx:key="*this">
+    <view 
+      class="key {{item === 'delete' ? 'func-key' : ''}}" 
+      bindtap="handleKeyPress" 
+      data-key="{{item}}"
+    >
+      {{item === 'delete' ? '⌫' : item}}
+    </view>
+  </block>
+</view>
+</view>

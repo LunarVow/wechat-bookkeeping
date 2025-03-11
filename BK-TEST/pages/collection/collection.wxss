@@ -1,0 +1,280 @@
+/* pages/collection.wxss */
+/* 安全区域适配 */
+.safe-area-top {
+  height: env(safe-area-inset-top);
+  width: 100%;
+  background: #000; /* 改为黑色保持统一 */
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 返回按钮样式修改 */
+.back-btn {
+  color: #fff;
+  font-size: 32rpx;
+  padding: 12rpx 24rpx;
+  background: #333; /* 新增灰色背景 */
+  border-radius: 40rpx;
+  margin-right: 20rpx;
+}
+
+/* 收支切换按钮 - 修改收入按钮样式 */
+.switch-buttons {
+  display: flex;
+  justify-content: center;
+  width: 66.66%;
+  flex: 1; /* 占据剩余空间 */
+  margin: 20rpx auto;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: #333; /* 按钮容器背景改为深灰 */
+}
+
+.switch-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #999; /* 非激活文字颜色 */
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.switch-btn.active {
+  color: #fff;
+  font-weight: 500;
+}
+
+.expense.active {
+  background: #ee3c3c;
+}
+
+.income.active {
+  background: #09be4f;
+}
+
+
+
+.custom-navbar {
+  position: fixed;
+  top: 0; /* 从安全区域下方开始 */
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  padding: 0 30rpx;
+  padding-top: env(safe-area-inset-top); /* 安全区域作为上内边距 */
+  height: 88rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.08);
+}
+
+.page-content {
+  padding-top: calc(88rpx + env(safe-area-inset-top) + 20rpx); /* 总间距 = 导航栏高度 + 安全区域 + 额外间距 */
+  padding-bottom: env(safe-area-inset-bottom);
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #000;
+  color: #fff; /* 默认文字颜色改为白色 */
+  
+}
+/* 新增标题框样式 */
+.title-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 44rpx;
+  height: 80rpx;
+  margin: 0 30rpx;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
+  position: relative;
+  padding: 0 20rpx;
+}
+
+.nav-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 类别图标 */
+.category-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 20rpx;
+  gap: 10rpx;
+  background: #333; /* 整体背景色 */
+  border-radius: 20rpx; /* 整体圆角 */
+  margin: 20rpx; /* 外边距留白 */
+  border: 4rpx solid #444; /* 整体边框 */
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1); /* 可选阴影 */
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx;
+}
+
+/* 修改后的分类名称样式 */
+.category-item text {
+  font-size: 26rpx;  /* 从24rpx缩小到22rpx */
+  margin-top: 8rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 8rpx;
+  line-height: 1.2;  /* 添加行高优化 */
+}
+
+/* 修改后的样式 */
+/* 普通状态 */
+.category-item image {
+  filter: invert(1); /* 反转颜色 */
+  opacity: 0.8;
+}
+
+/* collection.wxss */
+.category-container .category-item.active > image {
+  filter: 
+    invert(63%) 
+    sepia(92%) 
+    saturate(413%) 
+    hue-rotate(345deg) 
+    brightness(101%) 
+    contrast(91%) !important;
+  opacity: 1 !important;
+}
+
+
+.input-section {
+  padding: 0 20rpx; /* 添加与键盘相同的左右边距 */
+
+}
+
+.remark-input {
+  width: 300rpx;
+  background: #333 !important;
+  color: #fff !important;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin: 20rpx 0;
+  font-size: 32rpx;
+}
+
+/* 日期选择器样式 - 新增 */
+.date-picker {
+  background: #333 !important;
+  color: #fff !important;
+  font-size: 32rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  z-index: 1; /* 确保在其他元素之上 */
+}
+
+/* 数字键盘 */
+.num-keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10rpx;
+  padding: 20rpx;
+  background: #000; /* 键盘容器背景 */
+}
+
+.key {
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  background: #333 !important; /* 按键灰色 */
+  color: #fff !important; /* 文字白色 */
+}
+
+.key[data-key="保存"] {
+  background: #ee3c3c !important;
+  color: #fff !important;
+  font-size: 28rpx;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row; /* 设置主轴方向为行 */
+  justify-content: space-between; /* 两端对齐 */
+  align-items: center; /* 垂直居中 */
+  padding: 10px; /* 添加一些内边距 */
+}
+
+/* 修改日期行布局 */
+
+.date-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative; /* 确保子元素不会穿透 */
+}
+
+.date-picker {
+  min-width: 290rpx;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  text-align: center;
+}
+
+.time-picker {
+
+  text-align: center;
+
+}
+
+/* 金额显示容器 */
+.amount-display {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* 让容器紧靠右边 */
+  padding: 0; /* 清除内边距 */
+  color: #ee3c3c;
+
+}
+
+/* 金额符号 */
+.amount-symbol {
+  font-size: 40rpx;
+}
+
+/* 金额输入框 */
+.amount-input {
+  font-size: 36rpx;
+  padding: 0; /* 清除内边距 */
+  margin: 0; /* 清除外边距 */
+  width: auto;
+  min-width: 80rpx; /* 最小宽度防止折叠 */
+  color: #ee3c3c;
+}
+
+
+/* 键盘按键高亮效果 */
+.key:active {
+  background-color: #e0e0e0 !important;
+}
+
+.func-key:active {
+  background-color: #ff4444 !important;
+  color: white !important;
+}
+

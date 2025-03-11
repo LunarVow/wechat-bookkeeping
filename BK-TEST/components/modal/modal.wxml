@@ -1,0 +1,40 @@
+<!-- components/modal/modal.wxml -->
+<view class="modal-overlay" wx:if="{{visible}}">
+  <view class="modal-container">
+    <view class="modal-header">
+      <text class="title">交易详情</text>
+      <text class="close" bindtap="closeModal">×</text>
+    </view>
+    
+    <view class="modal-content">
+      <!-- 原有内容保持不变 -->
+      <view class="detail-item">
+        <text class="label">时间：</text>
+        <text class="value">{{transaction.date}} {{transaction.time}}</text>
+      </view>
+      <view class="detail-item align-center">
+        <text class="label">类型：</text>
+        <text class="value type-tag {{transaction.type === '支出' ? 'expense' : 'income'}}">{{transaction.type}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">分类：</text>
+        <text class="value">{{transaction.description}}</text>
+      </view>
+      <view class="detail-item align-center">
+        <text class="label">金额：</text>
+        <text class="value amount {{transaction.type === '支出' ? 'expense' : 'income'}}">{{transaction.amount}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="label">备注：</text>
+        <text class="value">{{transaction.remark}}</text>
+      </view>
+
+      <!-- 新增操作按钮 -->
+      <view class="action-buttons">
+        <view class="btn copy" bindtap="handleCopy">复制</view>
+        <view class="btn edit" bindtap="handleEdit">修改</view>
+        <view class="btn delete" bindtap="handleDelete">删除</view>
+      </view>
+    </view>
+  </view>
+</view>

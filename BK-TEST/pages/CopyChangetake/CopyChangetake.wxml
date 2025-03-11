@@ -1,0 +1,72 @@
+<!-- pages/CopyChangetake/CopyChangetake.wxml -->
+<wxs src="../../utils/format.wxs" module="tools" />
+
+<view class="safe-area-top"></view>
+<view class="custom-navbar">
+  <view class="title-box">
+    <text class="nav-title"></text>
+  </view>
+</view>
+
+<view class="page-content">
+  <view class="nav-header">
+    <view class="back-btn" bindtap="goBack">‹ 返回</view>
+    <view class="switch-buttons">
+      <view class="switch-btn income active">收入</view>
+    </view>
+  </view>
+
+  <view class="operation-tip">
+    <text wx:if="{{mode === 'copy'}}">正在复制一条收入记录</text>
+    <text wx:if="{{mode === 'edit'}}">正在编辑收入记录（ID：{{editData._id}}）</text>
+  </view>
+
+  <view class="category-container">
+    <block wx:for="{{categories}}" wx:key="id">
+      <view 
+        class="category-item {{selectedCategory === item.id ? 'active' : ''}}" 
+        bindtap="selectCategory" 
+        data-id="{{item.id}}"
+      >
+        <image src="{{selectedCategory === item.id ? item.activeIcon : item.icon}}" style="width: 40px; height: 40px;"/>
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="input-section">
+    <view class="date-row">
+      <picker mode="date" value="{{currentDate}}" bindchange="onDateChange">
+        <view class="date-picker">{{currentDate}}</view>
+      </picker>
+      <picker mode="time" value="{{currentTime}}" bindchange="onTimeChange">
+        <view class="date-picker time-picker">{{currentTime}}</view>
+      </picker>
+    </view>
+
+    <view class="date-row">
+      <input 
+        placeholder="点此输入备注..." 
+        value="{{remark}}" 
+        bindinput="onRemarkInput"
+        class="remark-input"
+      />
+      <view class="amount-display">
+        <text class="amount-symbol">¥</text>
+        <input type="digit" value="{{amount || '0.00'}}" placeholder="0.00" disabled class="amount-input"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="num-keyboard">
+    <block wx:for="{{keyboardKeys}}" wx:key="*this">
+      <view 
+        class="key {{item === 'delete' ? 'func-key' : ''}} {{item === '保存' ? 'save-btn' : ''}}" 
+        bindtap="handleKeyPress" 
+        data-key="{{item}}"
+      >
+        {{item === 'delete' ? '⌫' : (mode === 'edit' && item === '保存' ? '更新' : item)}}
+      </view>
+    </block>
+  </view>
+</view>

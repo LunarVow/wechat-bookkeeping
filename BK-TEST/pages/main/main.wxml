@@ -20,9 +20,10 @@
     >
       月度账单
     </navigator>
+
     <navigator 
-      url="/pages/AnnualBillBill/AnnualBillBill" 
-      class="btn AnnualBill-btn"
+      url="/pages/AnnualBill/AnnualBill" 
+      class="btn annualbill-btn"
     >
       年度账单
     </navigator>

@@ -34,6 +34,7 @@
   background-color: #d0ff00;
 }
 
-.AnnualBillbill-btn {
-  background-color: #03ff6c;
+
+.annualbill-btn {
+  background-color: #007AFF;  /* 使用iOS系统蓝 */
 }

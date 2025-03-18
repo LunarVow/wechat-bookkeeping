@@ -1,0 +1,53 @@
+<!-- pages/CalendarStatistics/CalendarStatistics.wxml -->
+<view class="container">
+  <view class="header">
+    <picker mode="date" fields="month" value="{{currentMonth.replace('.', '-')}}" 
+            bindchange="handleMonthChange" class="month-picker">
+      <view class="month-title">
+        {{currentMonth}} <text class="icon-down">▼</text>
+      </view>
+    </picker>
+    <view class="today-btn" bindtap="goToToday">今天</view>
+  </view>
+
+  <view class="calendar">
+    <view class="week-header">
+      <text wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="index" class="week-day">{{item}}</text>
+    </view>
+    <view class="date-grid">
+      <view 
+        wx:for="{{dates}}" 
+        wx:key="date" 
+        class="date-cell {{selectedDate === item.date ? 'selected' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}}"
+        bindtap="selectDate" 
+        data-date="{{item.date}}"
+      >
+        <text class="solar-day">{{item.day}}</text>
+        <text class="lunar-day">{{item.festival ? item.festival : item.lunar}}</text>
+        <text wx:if="{{item.lunar === '初一'}}" class="lunar-month">{{item.lunarMonth}}</text>
+        <view class="amount-indicator">
+          <text wx:if="{{item.income > 0}}" class="income">+{{item.income.toFixed(2)}}</text>
+          <text wx:if="{{item.expense > 0}}" class="expense">-{{item.expense.toFixed(2)}}</text>
+        </view>
+        <view wx:if="{{item.hasRecord}}" class="record-dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="statistics">
+    <view class="monthly-stats">
+      <view class="stat-item">
+        <text class="label">收入</text>
+        <text class="value income">{{monthlyData.income}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="label">支出</text>
+        <text class="value expense">{{monthlyData.expense}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="label">结余</text>
+        <text class="value balance">{{monthlyData.balance}}</text>
+      </view>
+    </view>
+  </view>
+</view>

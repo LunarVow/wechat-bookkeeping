@@ -1,0 +1,13 @@
+// utils/filter.wxs
+function formatDateWithWeek(dateStr) {
+  var weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+  var parts = dateStr.split('-')
+  var month = parseInt(parts[1])
+  var day = parseInt(parts[2])
+  var date = getDate(new Date(parts[0], month-1, day))
+  return month + '月' + day + '日 ' + weekDays[date.getDay()]
+}
+
+module.exports = {
+  formatDateWithWeek: formatDateWithWeek
+}

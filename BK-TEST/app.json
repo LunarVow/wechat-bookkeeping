@@ -1,15 +1,18 @@
 {
   "pages": [
+    "pages/CalendarStatistics/CalendarStatistics",
     "pages/AnnualBill/AnnualBill",
     "pages/MonthlyBill/MonthlyBill",
-
     "pages/main/main",
     "pages/collection/collection",
     "pages/take/take",
     "pages/index/index",
     "pages/CopyChangecollection/CopyChangecollection",
     "pages/CopyChangetake/CopyChangetake",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/OverviewMap/OverviewMap"
+
+
   ],
   "window": {
     "navigationStyle": "custom",

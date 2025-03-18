@@ -1,0 +1,217 @@
+/* pages/CalendarStatistics/CalendarStatistics.wxss */
+.container {
+  background-color: #000;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+/* 顶部导航栏 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40rpx 30rpx;
+  background-color: #000;
+  position: relative;
+}
+
+.back-btn, .menu-btn {
+  font-size: 36rpx;
+  color: #fff;
+  padding: 12rpx 24rpx;
+  background: #333;
+  border-radius: 40rpx;
+}
+
+.month-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 日历容器 */
+.calendar-container {
+  background-color: #000;
+  margin: 20rpx 0;
+}
+
+/* 星期标题 */
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #333;
+}
+
+.week-day {
+  width: 14%;
+  text-align: center;
+  color: #888;
+  font-size: 28rpx;
+}
+
+/* 日期网格 */
+.date-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+
+.date-cell {
+  width: calc(14.28% - 10rpx);
+  margin: 5rpx;
+  background-color: #333;
+  border-radius: 16rpx;
+  padding: 15rpx;
+  box-sizing: border-box;
+  min-height: 120rpx;
+}
+
+.date-number {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.date-info {
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8rpx;
+}
+
+.lunar-date {
+  color: #666;
+}
+
+.amount {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* 月度统计栏 */
+.monthly-stats {
+  background-color: #333;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 30rpx 0;
+}
+
+.stats-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.tab {
+  padding: 10rpx 30rpx;
+  border-radius: 40rpx;
+  background-color: #444;
+  font-size: 28rpx;
+  color: #888;
+}
+
+.tab.active {
+  background-color: #666;
+  color: #fff;
+}
+
+.monthly-data {
+  font-size: 28rpx;
+  color: #888;
+  text-align: center;
+}
+
+.monthly-data text {
+  margin: 0 15rpx;
+}
+
+/* 日期详情 */
+.date-details {
+  background-color: #333;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 30rpx 0;
+}
+
+.date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #444;
+  margin-bottom: 20rpx;
+}
+
+.selected-date {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.expense-total {
+  font-size: 32rpx;
+  color: #ff4d4d;
+}
+
+.expense-list {
+  margin-top: 20rpx;
+}
+
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx 0;
+  border-bottom: 1rpx solid #444;
+}
+
+.expense-item:last-child {
+  border-bottom: none;
+}
+
+.category-icon .icon-dot {
+  color: #ff4d4d;
+  font-size: 36rpx;
+}
+
+.category-name {
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.expense-amount {
+  font-size: 32rpx;
+  color: #ff4d4d;
+  font-weight: 500;
+}
+
+/* 底部按钮 */
+.bottom-buttons {
+  position: fixed;
+  bottom: 60rpx;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+}
+
+.add-btn, .today-btn {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  background-color: #333;
+  border: 2rpx solid #666;
+  color: #fff;
+}
+
+.add-btn {
+  background-color: #00cc66;
+  border: none;
+}

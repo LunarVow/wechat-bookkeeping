@@ -1,8 +1,6 @@
-<!-- pages/CalendarStatistics/CalendarStatistics.wxml -->
 <view class="container">
   <view class="header">
-    <picker mode="date" fields="month" value="{{currentMonth.replace('.', '-')}}" 
-            bindchange="handleMonthChange" class="month-picker">
+    <picker mode="date" fields="month" value="{{currentMonth.replace('.', '-')}}" bindchange="handleMonthChange" class="month-picker">
       <view class="month-title">
         {{currentMonth}} <text class="icon-down">▼</text>
       </view>
@@ -14,28 +12,34 @@
     <view class="week-header">
       <text wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="index" class="week-day">{{item}}</text>
     </view>
-    <view class="date-grid">
-      <view 
-        wx:for="{{dates}}" 
-        wx:key="date" 
-        class="date-cell {{selectedDate === item.date ? 'selected' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}}"
-        bindtap="selectDate" 
-        data-date="{{item.date}}"
-      >
-        <text class="solar-day">{{item.day}}</text>
-        <text class="lunar-day">{{item.festival ? item.festival : item.lunar}}</text>
-        <text wx:if="{{item.lunar === '初一'}}" class="lunar-month">{{item.lunarMonth}}</text>
-        <view class="amount-indicator">
-          <text wx:if="{{item.income > 0}}" class="income">+{{item.income.toFixed(2)}}</text>
-          <text wx:if="{{item.expense > 0}}" class="expense">-{{item.expense.toFixed(2)}}</text>
-        </view>
-        <view wx:if="{{item.hasRecord}}" class="record-dot"></view>
+    <view class="date-grid" style="width: 691rpx; display: flex; box-sizing: border-box">
+      <view wx:for="{{dates}}" wx:key="date" class="date-cell {{selectedDate === item.date ? 'selected' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}}" bindtap="selectDate" data-date="{{item.date}}">
+        <block wx:if="{{item.isCurrentMonth}}">
+          <block wx:if="{{item.hasRecord}}">
+            <view class="record-display">
+              <text class="solar-day-record">{{item.day}}</text>
+              <view class="amount-rows">
+                <text wx:if="{{item.income > 0}}" class="income-record">+{{item.income}}</text>
+                <text wx:if="{{item.expense > 0}}" class="expense-record">-{{item.expense}}</text>
+                <!-- 小程序模板中不允许直接调用函数（如 toFixed()），会导致显示异常 -->
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <text class="solar-day">{{item.day}}</text>
+            <text class="lunar-display {{item.festival ? 'festival-text' : ''}}">{{item.displayText}}</text>
+          </block>
+          <view wx:if="{{item.hasRecord}}" class="record-dot"></view>
+        </block>
+        <block wx:else>
+          <view class="empty-cell"></view>
+        </block>
       </view>
     </view>
   </view>
 
   <view class="statistics">
-    <view class="monthly-stats">
+    <view class="monthly-stats" style="height: 183rpx; display: block; box-sizing: border-box; width: 660rpx">
       <view class="stat-item">
         <text class="label">收入</text>
         <text class="value income">{{monthlyData.income}}</text>
@@ -50,4 +54,44 @@
       </view>
     </view>
   </view>
+  <view class="transactions" style="width: 691rpx; display: block; box-sizing: border-box">
+  <block wx:if="{{hasTransactions}}">
+    <block wx:for="{{transactions}}" wx:key="date">
+      <view class="date-group">
+        <view class="group-header">
+          <text class="date-text">{{item.date}}</text>
+          <view class="daily-totals">
+            <text class="total-income">+¥{{item.income}}</text>
+            <text class="total-expense">-¥{{item.expense}}</text>
+          </view>
+        </view>
+        <view class="group-items">
+          <block wx:for="{{item.items}}" wx:key="_id">
+            <view class="transaction-item" bindtap="onTransactionTap" data-id="{{item._id}}">
+              <view class="left">
+                <view class="time">{{item.time}}</view>
+                <view class="description">{{item.description}}</view>
+                <view class="remark" wx:if="{{item.remark && item.remark !== '无备注'}}">{{item.remark}}</view>
+              </view>
+              <view class="amount {{item.type === '支出' ? 'expense' : 'income'}}">{{item.amount}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </block>
+  
+  <block wx:else>
+    <view class="empty-state">
+      <text class="empty-text">{{currentMonth}}暂无记录</text>
+    </view>
+  </block>
+</view>
+
+<!-- 弹窗组件保持在最底部 -->
+<detail-modal 
+  visible="{{showDetailModal}}" 
+  transaction="{{selectedTransaction}}"
+  bind:close="handleCloseModal"
+/>
 </view>

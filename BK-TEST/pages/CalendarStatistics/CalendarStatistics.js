@@ -111,6 +111,9 @@ const Lunar = {
 
 Page({
   data: {
+    selectedTab: 'all' ,
+    showSelectedDate: false,  // 是否显示特定日期的记录
+    selectedDateTransactions: [], // 选中日期的交易数据
     currentMonth: '',
     dates: [],
     monthlyData: { income: '0.00', expense: '0.00', balance: '0.00' },
@@ -184,6 +187,31 @@ Page({
     }
   },
 
+// 新增切换选项卡方法
+switchTab(e) {
+  const tab = e.currentTarget.dataset.tab
+  this.setData({ selectedTab: tab }, () => {
+    this.updateCellStyles()
+  })
+},
+// 新增计算方法
+getBalanceStatus(income, expense) {
+  const balance = income - expense
+  if (balance > 0) return 'positive'
+  if (balance < 0) return 'negative'
+  return 'neutral'
+},
+
+// 新增更新样式方法
+updateCellStyles() {
+  this.setData({
+    dates: this.data.dates.map(cell => ({
+      ...cell,
+      balanceStatus: this.getBalanceStatus(cell.income, cell.expense)
+    }))
+  })
+},
+
   mergeTransactionData() {
     const monthPrefix = this.data.currentMonth.replace('.', '-') + '-'
     db.collection('keepinglist')
@@ -216,11 +244,15 @@ Page({
         this.setData({
           dates: this.data.dates.map(cell => {
             const record = dayMap[cell.date]
+            const income = record ? parseFloat(record.income) : 0
+            const expense = record ? parseFloat(record.expense) : 0
+            
             return {
               ...cell,
-              // 直接存储格式化后的字符串（保留两位小数）
-              income: record ? record.income.toFixed(2) : '0.00', // 改为字符串
-              expense: record ? record.expense.toFixed(2) : '0.00', // 改为字符串
+              income: income.toFixed(2),
+              expense: expense.toFixed(2),
+              balance: (income - expense).toFixed(2),
+              balanceStatus: this.getBalanceStatus(income, expense),
               hasRecord: !!record
             }
           })
@@ -281,7 +313,8 @@ Page({
       const key = item.date;
       if (!groupedTransactions[key]) {
         groupedTransactions[key] = {
-          date: this.formatDateWithWeek(item.date),
+          displayDate: this.formatDateWithWeek(item.date), // 新增显示用字段
+          date: item.date, // 保留原始日期
           items: [],
           income: 0,
           expense: 0
@@ -297,6 +330,7 @@ Page({
 
       groupedTransactions[key].items.push({
         _id: item._id,
+        date: item.date, // 添加原始日期字段
         time: item.time,
         description: item.category?.name || '未分类',
         amount: `${item.type === '支出' ? '-' : '+'}¥${amount.toFixed(2)}`,
@@ -381,17 +415,39 @@ Page({
     const value = e.detail.value
     this.setData({
       currentMonth: value.replace('-', '.'),
-      selectedDate: value + '-01'
+      selectedDate: value + '-01',
+      showSelectedDate: false,    // 重置显示状态
+      selectedDateTransactions: [] // 清空选中数据
     }, () => {
       this.initCalendar()
       this.loadMonthlyData()
     })
   },
 
-  selectDate(e) {
-    const date = e.currentTarget.dataset.date
-    this.setData({ selectedDate: date })
-  },
+
+selectDate(e) {
+  const date = e.currentTarget.dataset.date;
+  const isSameDate = this.data.selectedDate === date;
+  
+  // 如果是重复点击相同日期则切换显示模式
+  if (this.data.showSelectedDate && isSameDate) {
+    this.setData({ 
+      showSelectedDate: false,
+      selectedDate: date 
+    });
+  } else {
+    // 过滤出选中日期的交易数据
+    const selectedGroup = this.data.transactions.find(
+      group => group.date === date
+    );
+    
+    this.setData({
+      selectedDate: date,
+      showSelectedDate: true,
+      selectedDateTransactions: selectedGroup ? [selectedGroup] : []
+    });
+  }
+},
 
   goToToday() {
     const now = new Date()

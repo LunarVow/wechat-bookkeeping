@@ -1,4 +1,6 @@
+<!-- pages/CalendarStatistics/CalendarStatistics.wxml -->
 <view class="container">
+  <!-- 头部 -->
   <view class="header">
     <picker mode="date" fields="month" value="{{currentMonth.replace('.', '-')}}" bindchange="handleMonthChange" class="month-picker">
       <view class="month-title">
@@ -8,20 +10,37 @@
     <view class="today-btn" bindtap="goToToday">今天</view>
   </view>
 
+  <!-- 日历 -->
   <view class="calendar">
     <view class="week-header">
       <text wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="index" class="week-day">{{item}}</text>
     </view>
-    <view class="date-grid" style="width: 691rpx; display: flex; box-sizing: border-box">
-      <view wx:for="{{dates}}" wx:key="date" class="date-cell {{selectedDate === item.date ? 'selected' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}}" bindtap="selectDate" data-date="{{item.date}}">
+    <view class="date-grid">
+      <view 
+        wx:for="{{dates}}" 
+        wx:key="date" 
+        class="date-cell {{selectedDate === item.date ? 'selected' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}} {{item.isCurrentMonth && selectedTab === 'balance' ? item.balanceStatus : ''}} {{item.isCurrentMonth && selectedTab === 'income' ? 'income-mode' : ''}} {{item.isCurrentMonth && selectedTab === 'expense' ? 'expense-mode' : ''}}"
+        bindtap="selectDate" 
+        data-date="{{item.date}}"
+      >
         <block wx:if="{{item.isCurrentMonth}}">
           <block wx:if="{{item.hasRecord}}">
             <view class="record-display">
               <text class="solar-day-record">{{item.day}}</text>
               <view class="amount-rows">
-                <text wx:if="{{item.income > 0}}" class="income-record">+{{item.income}}</text>
-                <text wx:if="{{item.expense > 0}}" class="expense-record">-{{item.expense}}</text>
-                <!-- 小程序模板中不允许直接调用函数（如 toFixed()），会导致显示异常 -->
+                <block wx:if="{{selectedTab === 'all'}}">
+                  <text wx:if="{{item.income > 0}}" class="income-record">+{{item.income}}</text>
+                  <text wx:if="{{item.expense > 0}}" class="expense-record">-{{item.expense}}</text>
+                </block>
+                <block wx:if="{{selectedTab === 'balance'}}">
+                  <text class="{{item.balanceStatus}}-text">{{item.balance}}</text>
+                </block>
+                <block wx:if="{{selectedTab === 'income'}}">
+                  <text class="income-text">{{item.income}}</text>
+                </block>
+                <block wx:if="{{selectedTab === 'expense'}}">
+                  <text class="expense-text">{{item.expense}}</text>
+                </block>
               </view>
             </view>
           </block>
@@ -29,7 +48,6 @@
             <text class="solar-day">{{item.day}}</text>
             <text class="lunar-display {{item.festival ? 'festival-text' : ''}}">{{item.displayText}}</text>
           </block>
-          <view wx:if="{{item.hasRecord}}" class="record-dot"></view>
         </block>
         <block wx:else>
           <view class="empty-cell"></view>
@@ -38,8 +56,35 @@
     </view>
   </view>
 
-  <view class="statistics">
-    <view class="monthly-stats" style="height: 183rpx; display: block; box-sizing: border-box; width: 660rpx">
+  <!-- 筛选选项卡 -->
+  <view class="filter-container">
+    <view class="filter-tabs">
+      <view 
+        class="tab-item {{selectedTab === 'all' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="all"
+      >收支</view>
+      <view 
+        class="tab-item {{selectedTab === 'balance' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="balance"
+      >结余</view>
+      <view 
+        class="tab-item {{selectedTab === 'income' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="income"
+      >收入</view>
+      <view 
+        class="tab-item {{selectedTab === 'expense' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="expense"
+      >支出</view>
+    </view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="statistics" style="height: 181rpx; display: block; box-sizing: border-box; width: 650rpx">
+    <view class="monthly-stats" style="height: 183rpx; display: block; box-sizing: border-box; width: 652rpx">
       <view class="stat-item">
         <text class="label">收入</text>
         <text class="value income">{{monthlyData.income}}</text>
@@ -54,44 +99,78 @@
       </view>
     </view>
   </view>
-  <view class="transactions" style="width: 691rpx; display: block; box-sizing: border-box">
-  <block wx:if="{{hasTransactions}}">
-    <block wx:for="{{transactions}}" wx:key="date">
-      <view class="date-group">
-        <view class="group-header">
-          <text class="date-text">{{item.date}}</text>
-          <view class="daily-totals">
-            <text class="total-income">+¥{{item.income}}</text>
-            <text class="total-expense">-¥{{item.expense}}</text>
-          </view>
-        </view>
-        <view class="group-items">
-          <block wx:for="{{item.items}}" wx:key="_id">
-            <view class="transaction-item" bindtap="onTransactionTap" data-id="{{item._id}}">
-              <view class="left">
-                <view class="time">{{item.time}}</view>
-                <view class="description">{{item.description}}</view>
-                <view class="remark" wx:if="{{item.remark && item.remark !== '无备注'}}">{{item.remark}}</view>
-              </view>
-              <view class="amount {{item.type === '支出' ? 'expense' : 'income'}}">{{item.amount}}</view>
-            </view>
-          </block>
-        </view>
-      </view>
-    </block>
-  </block>
-  
-  <block wx:else>
-    <view class="empty-state">
-      <text class="empty-text">{{currentMonth}}暂无记录</text>
-    </view>
-  </block>
-</view>
 
-<!-- 弹窗组件保持在最底部 -->
-<detail-modal 
-  visible="{{showDetailModal}}" 
-  transaction="{{selectedTransaction}}"
-  bind:close="handleCloseModal"
-/>
+  <view class="transactions" style="width: 691rpx; display: block; box-sizing: border-box">
+    <block wx:if="{{showSelectedDate}}">
+      <block wx:if="{{selectedDateTransactions.length > 0}}">
+        <block wx:for="{{selectedDateTransactions}}" wx:key="date">
+          <view class="date-group">
+            <view class="group-header">
+              <text class="date-text">{{item.displayDate}}</text>
+              <view class="daily-totals">
+                <text class="total-income">+¥{{item.income}}</text>
+                <text class="total-expense">-¥{{item.expense}}</text>
+              </view>
+            </view>
+            <view class="group-items">
+              <block wx:for="{{item.items}}" wx:key="_id">
+                <view class="transaction-item" bindtap="onTransactionTap" data-id="{{item._id}}" style="height: 179rpx; display: flex; box-sizing: border-box">
+                  <view class="left">
+                    <view class="time">{{item.time}}</view>
+                    <view class="description">{{item.description}}</view>
+                    <view class="remark" wx:if="{{item.remark && item.remark !== '无备注'}}">{{item.remark}}</view>
+                  </view>
+                  <view class="amount {{item.type === '支出' ? 'expense' : 'income'}}">{{item.amount}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="empty-state">
+          <text class="empty-text">该日期暂无记录</text>
+        </view>
+      </block>
+    </block>
+
+    <block wx:else>
+      <block wx:if="{{hasTransactions}}">
+        <block wx:for="{{transactions}}" wx:key="date">
+          <view class="date-group">
+            <view class="group-header">
+              <text class="date-text">{{item.displayDate}}</text>
+              <view class="daily-totals">
+                <text class="total-income">+¥{{item.income}}</text>
+                <text class="total-expense">-¥{{item.expense}}</text>
+              </view>
+            </view>
+            <view class="group-items">
+              <block wx:for="{{item.items}}" wx:key="_id">
+                <view class="transaction-item" bindtap="onTransactionTap" data-id="{{item._id}}" style="height: 179rpx; display: flex; box-sizing: border-box">
+                  <view class="left">
+                    <view class="time">{{item.time}}</view>
+                    <view class="description">{{item.description}}</view>
+                    <view class="remark" wx:if="{{item.remark && item.remark !== '无备注'}}">{{item.remark}}</view>
+                  </view>
+                  <view class="amount {{item.type === '支出' ? 'expense' : 'income'}}" style="height: 74rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">{{item.amount}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="empty-state">
+          <text class="empty-text">{{currentMonth}}暂无记录</text>
+        </view>
+      </block>
+    </block>
+  </view>
+
+  <detail-modal 
+    visible="{{showDetailModal}}" 
+    transaction="{{selectedTransaction}}"
+    bind:close="handleCloseModal"
+  />
 </view>

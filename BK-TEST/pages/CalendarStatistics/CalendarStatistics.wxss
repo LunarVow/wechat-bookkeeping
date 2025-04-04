@@ -66,7 +66,7 @@
   padding: 15rpx;
   box-sizing: border-box;
   min-height: 140rpx;
-  
+  transition: all 0.3s ease;
 }
 
 .date-number {
@@ -362,4 +362,86 @@
 .empty-text {
   color: #666;
   font-size: 28rpx;
+}
+
+/* 外层容器 */
+.filter-container {
+  border: 2rpx solid #333;
+  border-radius: 16rpx;
+  margin: 30rpx 0;
+  padding: 20rpx;
+  background: #000;
+}
+
+/* 按钮容器 */
+.filter-tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+/* 单个按钮 */
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border: 2rpx solid #333;
+  border-radius: 16rpx;  /* 调整圆角弧度 */
+  font-size: 28rpx;
+  color: #888;
+  transition: all 0.3s;
+  background: #1a1a1a;
+}
+
+/* 激活状态 */
+.tab-item.active {
+  border-color: #fff;
+  color: #fff;
+  background: #333;
+  box-shadow: 0 4rpx 12rpx rgba(255,255,255,0.1);
+}
+
+/* wxss 新增样式 */
+/* 结余模式 */
+.date-cell.positive {
+  background: rgba(0, 204, 102, 0.1) !important;
+  border: 2rpx solid #00cc66;
+}
+.date-cell.negative {
+  background: rgba(255, 77, 77, 0.1) !important;
+  border: 2rpx solid #ff4d4d;
+}
+
+/* 收入模式 */
+.date-cell.income-mode {
+  background: rgba(0, 204, 102, 0.1) !important;
+  border: 2rpx solid #00cc66;
+}
+
+/* 支出模式 */
+.date-cell.expense-mode {
+  background: rgba(255, 77, 77, 0.1) !important;
+  border: 2rpx solid #ff4d4d;
+}
+
+/* 文字颜色 */
+.positive-text { color: #00cc66 !important; }
+.negative-text { color: #ff4d4d !important; }
+.income-text { color: #00cc66 !important; }
+.expense-text { color: #ff4d4d !important; }
+
+.income-record,
+.expense-record,
+.positive-text,
+.negative-text,
+.income-text,
+.expense-text {
+  font-size: 24rpx !important;  /* 统一字体大小 */
+  line-height: 1.4;  /* 保持行高一致 */
+}
+
+/* 非当前月份保持灰色 */
+.date-cell.other-month {
+  background: #1a1a1a !important;
+  border-color: transparent !important;
 }

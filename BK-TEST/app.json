@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/CalendarStatistics/CalendarStatistics",
+    "pages/Periodictake/Periodictake",
+    "pages/Periodicaccount/Periodicaccount",
     "pages/main/main",
-
     "pages/AnnualBill/AnnualBill",
     "pages/MonthlyBill/MonthlyBill",
-    
+    "pages/CalendarStatistics/CalendarStatistics",
     "pages/collection/collection",
     "pages/take/take",
     "pages/index/index",

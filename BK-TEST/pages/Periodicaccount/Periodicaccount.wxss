@@ -1,0 +1,197 @@
+/* pages/periodicaccount/periodicaccount.wxss */
+/* 安全区域适配 */
+page {
+  background: #000 !important;
+}
+
+
+
+/* 导航栏保持collection样式 */
+.nav-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.back-btn {
+  color: #fff;
+  font-size: 32rpx;
+  padding: 12rpx 24rpx;
+  background: #333;
+  border-radius: 40rpx;
+  margin-right: 20rpx;
+}
+
+.switch-buttons {
+  display: flex;
+  justify-content: center;
+  width: 66.66%;
+  flex: 1;
+  margin: 20rpx auto;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background: #333;
+}
+
+.switch-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #999;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.switch-btn.active {
+  color: #fff;
+  font-weight: 500;
+}
+
+.expense.active {
+  background: #ee3c3c;
+}
+
+.income.active {
+  background: #09be4f;
+}
+
+/* 月份选择器样式 */
+.month-picker {
+  background: #333;
+  color: #fff;
+  font-size: 32rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin: 20rpx;
+  text-align: center;
+}
+
+/* 分类容器保持collection样式 */
+.category-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 改为5列布局 */
+  padding: 20rpx;
+  gap: 10rpx;
+  background: #333;
+  border-radius: 20rpx;
+  margin: 20rpx;
+  border: 4rpx solid #444;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx;
+}
+
+.category-item text {
+  font-size: 26rpx;
+  margin-top: 8rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 8rpx;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.category-item image {
+  width: 40px;
+  height: 40px;
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.category-item.active > image {
+  filter: invert(63%) sepia(92%) saturate(413%) hue-rotate(345deg) brightness(101%) contrast(91%) !important;
+  opacity: 1 !important;
+}
+
+/* 输入区域保持collection样式 */
+.input-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  margin: 20rpx 0;
+}
+
+.remark-input {
+  width: 300rpx;
+  background: #333 !important;
+  color: #fff !important;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin: 20rpx 0;
+  font-size: 32rpx;
+}
+
+.amount-display {
+  font-size: 36rpx;
+  color: #ee3c3c;
+  text-align: right;
+  padding: 20rpx;
+}
+
+/* 小键盘保持collection样式 */
+.num-keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10rpx;
+  padding: 20rpx;
+  background: #000;
+}
+
+.key {
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.key[data-key="保存"] {
+  background: #ee3c3c !important;
+  color: #fff !important;
+}
+
+/* 交互状态保持collection样式 */
+.key:active {
+  background-color: #e0e0e0 !important;
+}
+
+.func-key:active {
+  background-color: #ff4444 !important;
+  color: white !important;
+}
+
+/* 金额符号样式 */
+.amount-symbol {
+  font-size: 40rpx;
+  color: #ee3c3c;
+  margin-right: 10rpx;
+}
+/* 月份范围选择器样式 */
+.month-range-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  margin: 20rpx;
+}
+
+.month-range-picker .month-picker {
+  background: #333;
+  color: #fff;
+  font-size: 32rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 12rpx;
+}

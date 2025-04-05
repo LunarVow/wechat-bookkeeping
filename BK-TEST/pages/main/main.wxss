@@ -38,3 +38,11 @@
 .annualbill-btn {
   background-color: #007AFF;  /* 使用iOS系统蓝 */
 }
+
+.Calendar-btn {
+  background-color: #000000;  /* 使用iOS系统蓝 */
+}
+
+.Periodicaccount-btn {
+  background-color: #a200ff;  /* 使用iOS系统蓝 */
+}

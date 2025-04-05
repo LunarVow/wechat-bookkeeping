@@ -27,5 +27,18 @@
     >
       年度账单
     </navigator>
+    <navigator 
+      url="/pages/CalendarStatistics/CalendarStatistics"
+      class="btn Calendar-btn"
+    >
+      日历账单
+    </navigator>
+
+    <navigator 
+      url="/pages/Periodicaccount/Periodicaccount"
+      class="btn Periodicaccount-btn"
+    >
+      周期记账
+    </navigator>
   </view>
 </view>

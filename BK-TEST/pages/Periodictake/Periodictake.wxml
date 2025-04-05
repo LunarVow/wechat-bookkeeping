@@ -1,0 +1,52 @@
+<!-- pages/Periodictake/Periodictake.wxml -->
+<view class="container">
+  <view class="nav-header" style="width: 695rpx; display: flex; box-sizing: border-box">
+    <view class="back-btn" bindtap="goBack">‹ 返回</view>
+    <view class="switch-buttons">
+      <view class="switch-btn expense {{isExpense ? 'active' : ''}}" bindtap="switchType" data-type="expense">支出</view>
+      <view class="switch-btn income {{!isExpense ? 'active' : ''}}" bindtap="switchType" data-type="income">收入</view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="category-container">
+      <block wx:for="{{categories}}" wx:key="id">
+        <view 
+          class="category-item {{selectedCategory === item.id ? 'active' : ''}}" 
+          bindtap="selectCategory" 
+          data-id="{{item.id}}"
+        >
+          <image src="{{selectedCategory === item.id ? item.activeIcon : item.icon}}"/>
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+
+    <view class="month-range-picker">
+      <picker mode="date" fields="month" value="{{startMonth}}" bindchange="setStartMonth">
+        <view class="month-picker">{{startMonth}}</view>
+      </picker>
+      <text>至</text>
+      <picker mode="date" fields="month" value="{{endMonth}}" bindchange="setEndMonth">
+        <view class="month-picker">{{endMonth}}</view>
+      </picker>
+    </view>
+
+    <view class="input-section">
+      <input class="remark-input" placeholder="输入备注..." value="{{remark}}" bindinput="onRemarkInput" />
+      <view class="amount-display">{{amount}}</view>
+    </view>
+
+    <view class="num-keyboard">
+      <block wx:for="{{keyboardKeys}}" wx:key="index">
+        <view 
+          class="key {{['+', '-', 'delete'].includes(item) ? 'func-key' : ''}} {{item === '保存' ? 'save-btn' : ''}}"
+          bindtap="handleKeyPress"
+          data-key="{{item}}"
+        >
+          {{item === 'delete' ? '⌫' : item}}
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

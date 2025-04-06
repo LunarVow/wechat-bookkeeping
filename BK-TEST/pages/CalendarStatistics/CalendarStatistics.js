@@ -19,6 +19,8 @@ const Lunar = {
     0x05aa0, 0x076a3, 0x096d0, 0x04afb, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45,
     0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0
   ],
+ 
+
 
   getLunar(date) {
     let year = date.getFullYear()
@@ -372,6 +374,7 @@ updateCellStyles() {
       });
     }
   },
+ 
 
   handleCloseModal() {
     this.setData({
@@ -379,8 +382,23 @@ updateCellStyles() {
       selectedTransaction: null
     });
   },
+  handleRefreshData() {
+    wx.showLoading({ title: '刷新中...' })
+    
+    // 顺序执行刷新操作
+    Promise.all([
+      this.loadMonthlyData(),
+      this.mergeTransactionData()
+    ]).then(() => {
+      this.initCalendar()
+      wx.hideLoading()
+      wx.showToast({ title: '数据已更新', icon: 'success' })
+    }).catch(err => {
+      wx.hideLoading()
+      wx.showToast({ title: '刷新失败', icon: 'none' })
+    })
+  },
 
-  // 修改原有loadMonthlyData方法
   loadMonthlyData() {
     const monthStr = this.data.currentMonth.replace('.', '-') + '-';
     db.collection('keepinglist')
@@ -461,5 +479,10 @@ selectDate(e) {
       this.initCalendar()
       this.loadMonthlyData()
     })
-  }
+  },
+  goBack() {
+    wx.redirectTo({
+      url: '/pages/main/main'
+    });
+  },
 })

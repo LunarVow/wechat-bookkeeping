@@ -60,7 +60,9 @@ Component({
         const db = wx.cloud.database()
         await db.collection('keepinglist').doc(this.data.transaction._id).remove()
         wx.showToast({ title: '删除成功', icon: 'success' })
-        this.triggerEvent('delete')
+        // 触发两个事件：关闭弹窗 + 通知父页面刷新数据
+        this.triggerEvent('close')    // 关闭弹窗
+        this.triggerEvent('refresh')  // 新增触发刷新事件
       } catch (err) {
         console.error('删除失败:', err)
         wx.showToast({ title: '删除失败', icon: 'none' })

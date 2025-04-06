@@ -165,5 +165,10 @@ Page({
       showDetailModal: false,
       selectedTransaction: null
     })
+  },
+  handleRefreshData() {
+    this.loadTransactionData(() => {
+      wx.showToast({ title: '数据已更新', icon: 'success' })
+    })
   }
 })

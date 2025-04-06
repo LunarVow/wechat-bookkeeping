@@ -2,19 +2,15 @@
   "compileType": "miniprogram",
   "libVersion": "trial",
   "setting": {
-    "coverView": true,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
     "enhance": true,
-    "showShadowRootInWxmlPanel": true,
-    "packNpmRelationList": [],
+    "urlCheck": false,
+    "ignoreUploadUnusedFiles": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "ignoreUploadUnusedFiles": true
+    "minified": true
   },
   "condition": {},
   "editorSetting": {
@@ -25,5 +21,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx73aaa3187cd7abff"
+  "appid": "wx73aaa3187cd7abff",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+  "cloudfunctionRoot": "cloudfunctions/"
 }

@@ -1,3 +1,8 @@
+
+page {
+  background: rgb(70, 64, 64) !important;
+}
+
 .container {
   display: flex;
   justify-content: center;

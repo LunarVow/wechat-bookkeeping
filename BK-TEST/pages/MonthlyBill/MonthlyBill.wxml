@@ -81,6 +81,8 @@
     visible="{{showDetailModal}}" 
     transaction="{{selectedTransaction}}"
     bind:close="handleCloseModal"
+    bind:refresh="handleRefreshData"
+    
   />
 </view>
 

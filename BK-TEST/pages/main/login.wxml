@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="login-box">
+    <image src="cloud://bookkeeping-0g8ou3g9e195b86f.626f-bookkeeping-0g8ou3g9e195b86f-1333597569/图标/fly1~1.png" class="logo"></image>
+    
+
+    <button type="primary" bindtap="onLogin">微信授权登录</button>
+
+    <!-- 状态提示保持不变 -->
+    <view wx:if="{{loginMessage}}" class="result-tip {{isValidUser ? 'success' : 'error'}}">
+      {{loginMessage}}
+    </view>
+  </view>
+</view>

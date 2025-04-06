@@ -8,7 +8,7 @@ Page({
         wx.cloud.callFunction({
           name: 'getOpenId',
           success: res => {
-            const validOpenId = 'o3sLz69w7tkbP4_4JHQ_4Gzvhvhg';
+            const validOpenId = 'XXXXXXXXX';
             
             if (res.result.openid === validOpenId) {
               wx.showToast({
